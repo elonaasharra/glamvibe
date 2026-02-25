@@ -1,10 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3">
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-0">
   <div class="container">
 
     <!-- Logo -->
-    <a class="navbar-brand fw-bold" href="{% url 'home' %}">
-      GLAMVIBE
-    </a>
+ <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+<img src="{% static 'images/GlamVibeLogo.png' %}"
+     alt="GlamVibe Logo"
+     style="height:90px; object-fit:contain;"></a>
 
     <!-- Icons -->
     <div class="d-flex align-items-center gap-3 order-lg-3">
