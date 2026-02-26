@@ -1,0 +1,33 @@
+/* FOOTER LIGHT BLUR VERSION */
+.footer-blur{
+  position: relative;
+  color: #222;   /* tekst dark */
+  overflow: hidden;
+}
+
+/* Background image blur */
+.footer-blur::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/static/images/GlamVibeLogo.png") center/cover no-repeat;
+  filter: blur(10px);
+  transform: scale(1.08);
+  opacity: 0.7;  /* e lehtë */
+  z-index: 0;
+}
+
+/* Pa overlay të errët */
+.footer-blur .container{
+  position: relative;
+  z-index: 1;
+}
+
+/* Links */
+.footer-blur a{
+  color: #444;
+}
+
+.footer-blur a:hover{
+  color: #000;
+}

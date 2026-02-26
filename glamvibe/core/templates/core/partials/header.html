@@ -1,12 +1,12 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-0">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-0 sticky-top main-navbar">
   <div class="container">
 
     <!-- Logo -->
  <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
 <img src="{% static 'images/GlamVibeLogo.png' %}"
      alt="GlamVibe Logo"
-     style="height:90px; object-fit:contain;"></a>
+     class="nav-logo"></a>
 
     <!-- Icons -->
     <div class="d-flex align-items-center gap-3 order-lg-3">
@@ -20,7 +20,7 @@
       <a href="#" class="text-dark fs-5 position-relative">
         <i class="bi bi-cart3"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-          2
+
         </span>
       </a>
 

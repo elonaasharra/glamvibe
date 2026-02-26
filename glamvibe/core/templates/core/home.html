@@ -3,6 +3,407 @@
 {% block title %}Home | GlamVibe{% endblock %}
 
 {% block content %}
-  <!-- Këtu fut vetëm content-in e faqes (pa header/footer) -->
-  <h1>Home</h1>
+{% load static %}
+<!-- HERO / CAROUSEL SECTION -->
+<section class="home-hero">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+              class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="{% static 'images/editorial_highFashion_slide1.png' %}" class="d-block w-100 hero-img" alt="GlamVibe Slide 1">
+        <div class="carousel-caption hero-caption">
+          <h5>New Season, New Energy</h5>
+          <p>Discover the latest trends & editorials.</p>
+          <a href="#" class="btn btn-light btn-sm">Explore</a>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'images/blog_slide2.png' %}" class="d-block w-100 hero-img" alt="GlamVibe Slide 2">
+        <div class="carousel-caption hero-caption">
+          <h5>Street Style Picks        </h5>
+          <p>Inspiration you can wear every day.</p>
+          <a href="#" class="btn btn-light btn-sm">Read More</a>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'images/shop_slide3.png' %}" class="d-block w-100 hero-img" alt="GlamVibe Slide 3">
+        <div class="carousel-caption hero-caption caption-left">          <h5>Shop the Look</h5>
+          <p>Your glam starts here.</p>
+          <a href="#" class="btn btn-light btn-sm">Shop Now</a>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</section>
+<!--MOST POPULAR SECTION -->
+<section class="most-popular-section">
+  <div class="container">
+    <div class="row align-items-center g-4">
+
+      <!-- Titulli -->
+      <div class="col-12 col-lg-3">
+        <h2 class="section-title text-lg-end text-center">EDITORIAL PICKS</h2>
+      </div>
+
+      <!-- Kartat -->
+      <div class="col-12 col-lg-9">
+        <div class="row g-3">
+
+          {#  Kur ta kesh DB: do vijnë nga most_popular #}
+          {% for post in most_popular %}
+          <div class="col-6 col-md-3">
+            <a href="{{ post.get_absolute_url }}" class="popular-card">
+              <div class="popular-thumb">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+              </div>
+              <div class="popular-body">
+                <h3 class="popular-title">{{ post.title }}</h3>
+                <span class="popular-link">Read more</span>
+              </div>
+            </a>
+          </div>
+          {% empty %}
+
+          {#  Placeholder derisa te lidhesh me databazen #}
+          <div class="col-6 col-md-3">
+            <a href="#" class="popular-card">
+              <div class="popular-thumb"><img src="{% static 'images/popular1.jpg' %}" alt=""></div>
+              <div class="popular-body"><h3 class="popular-title">Article Title</h3><span class="popular-link">Read more</span></div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <a href="#" class="popular-card">
+              <div class="popular-thumb"><img src="{% static 'images/popular2.jpg' %}" alt=""></div>
+              <div class="popular-body"><h3 class="popular-title">Article Title</h3><span class="popular-link">Read more</span></div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <a href="#" class="popular-card">
+              <div class="popular-thumb"><img src="{% static 'images/popular3.jpg' %}" alt=""></div>
+              <div class="popular-body"><h3 class="popular-title">Article Title</h3><span class="popular-link">Read more</span></div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <a href="#" class="popular-card">
+              <div class="popular-thumb"><img src="{% static 'images/popular4.jpg' %}" alt=""></div>
+              <div class="popular-body"><h3 class="popular-title">Article Title</h3><span class="popular-link">Read more</span></div>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="section-title m-0 text-lg-start text-center">BEST SELLERS</h2>
+
+    <!-- Shigjeta (unikë për këtë slider) -->
+    <div class="d-none d-lg-flex gap-2">
+      <button class="bestPrev btn btn-light" type="button" aria-label="Prev">‹</button>
+      <button class="bestNext btn btn-light" type="button" aria-label="Next">›</button>
+    </div>
+  </div>
+
+  <div class="swiper bestSwiper">
+    <div class="swiper-wrapper">
+
+      {% for product in best_sellers %}
+      <div class="swiper-slide">
+        <a href="{{ product.get_absolute_url }}" class="product-card">
+
+          <div class="product-img">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            {% if product.on_sale %}
+              <span class="badge-sale">Sale</span>
+            {% endif %}
+          </div>
+
+          <div class="product-info">
+            <div class="product-name">{{ product.name }}</div>
+
+            <div class="product-price">
+              {% if product.old_price %}
+                <span class="old">{{ product.old_price }}€</span>
+              {% endif %}
+              <span class="new">{{ product.price }}€</span>
+            </div>
+          </div>
+
+        </a>
+      </div>
+      {% empty %}
+
+      <!-- Placeholder derisa te lidhesh me DB -->
+      {% for i in "12345678910" %}
+      <div class="swiper-slide">
+        <a href="#" class="product-card">
+          <div class="product-img placeholder-img">
+            <span class="badge-sale">Sale</span>
+          </div>
+          <div class="product-info">
+            <div class="product-name">Product Name</div>
+            <div class="product-price">
+              <span class="old">59€</span>
+              <span class="new">39€</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Shigjeta për mobile/tablet (opsionale) -->
+  <div class="d-flex justify-content-center gap-2 mt-3 d-lg-none">
+    <button class="bestPrev btn btn-light" type="button" aria-label="Prev">‹</button>
+    <button class="bestNext btn btn-light" type="button" aria-label="Next">›</button>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".bestSwiper", {
+      slidesPerView: 5,
+      spaceBetween: 18,
+      slidesPerGroup: 1, // ✅ lëviz 1 nga 1
+      loop: false,
+      navigation: {
+        nextEl: ".bestNext",
+        prevEl: ".bestPrev",
+      },
+      breakpoints: {
+        0:   { slidesPerView: 1.2 },
+        576: { slidesPerView: 2.2 },
+        768: { slidesPerView: 3.2 },
+        992: { slidesPerView: 4.2 },
+        1200:{ slidesPerView: 5 }
+      }
+    });
+  });
+</script>
+
+
+
+<section class="opinion-section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2 class="section-title">OPINION &amp; COMMENTARY</h2>
+      <p class="section-subtitle">Thoughts, identity &amp; fashion culture</p>
+    </div>
+
+    <div class="row g-4">
+
+      {# ================= FEATURED ================= #}
+      <div class="col-12 col-lg-8">
+
+        {% if featured_opinion %}
+        <a href="{{ featured_opinion.get_absolute_url }}" class="opinion-featured">
+
+          <img src="{{ featured_opinion.image.url }}" alt="{{ featured_opinion.title }}">
+
+          <div class="opinion-overlay">
+            <div class="opinion-top">
+              <span class="opinion-badge">Most Liked</span>
+              <span class="likes-badge">❤ {{ featured_opinion.likes }}</span>
+            </div>
+
+            <h3>{{ featured_opinion.title }}</h3>
+            <p>{{ featured_opinion.excerpt|truncatewords:18 }}</p>
+
+            <span class="opinion-cta">Read Article →</span>
+          </div>
+
+        </a>
+        {% else %}
+        <!-- Placeholder -->
+        <a href="#" class="opinion-featured">
+          <img src="{% static 'images/opinion1.jpg' %}" alt="">
+          <div class="opinion-overlay">
+            <div class="opinion-top">
+              <span class="opinion-badge">Most Liked</span>
+              <span class="likes-badge">❤ 1.2k</span>
+            </div>
+            <h3>Is Fast Fashion Dying?</h3>
+            <p>A deeper look into sustainability and the future of the industry.</p>
+            <span class="opinion-cta">Read Article →</span>
+          </div>
+        </a>
+        {% endif %}
+
+      </div>
+
+      {# ================= SIDE POSTS ================= #}
+      <div class="col-12 col-lg-4">
+        <div class="row g-4">
+
+          {% for post in side_opinions %}
+          <div class="col-6 col-lg-12">
+            <a href="{{ post.get_absolute_url }}" class="opinion-card">
+              <div class="opinion-card-img">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                <span class="likes-badge small">❤ {{ post.likes }}</span>
+              </div>
+              <div class="opinion-card-body">
+                <h5>{{ post.title }}</h5>
+                <span class="opinion-cta small">Read →</span>
+              </div>
+            </a>
+          </div>
+          {% empty %}
+
+          <!-- Placeholder cards -->
+          <div class="col-6 col-lg-12">
+            <a href="#" class="opinion-card">
+              <div class="opinion-card-img">
+                <img src="{% static 'images/opinion2.jpg' %}" alt="">
+                <span class="likes-badge small">❤ 540</span>
+              </div>
+              <div class="opinion-card-body">
+                <h5>Do Trends Control Our Identity?</h5>
+                <span class="opinion-cta small">Read →</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-6 col-lg-12">
+            <a href="#" class="opinion-card">
+              <div class="opinion-card-img">
+                <img src="{% static 'images/opinion3.jpg' %}" alt="">
+                <span class="likes-badge small">❤ 420</span>
+              </div>
+              <div class="opinion-card-body">
+                <h5>Minimalism vs Maximalism</h5>
+                <span class="opinion-cta small">Read →</span>
+              </div>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="brand-quote-section">
+  <div class="container">
+    <div class="brand-quote-wrapper">
+
+      <span class="quote-symbol">“</span>
+
+      <h2 class="brand-quote-text">
+        Style is the art of becoming who you are.
+      </h2>
+
+      <span class="quote-author">— GlamVibe</span>
+
+    </div>
+  </div>
+</section>
+
+<section class="brands-section">
+  <div class="container">
+    <p class="brands-title">BRANDS WE LOVE</p>
+
+    <div class="swiper brandsSwiper">
+      <div class="swiper-wrapper">
+
+        <!-- Placeholder logos (statike tani) -->
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand1.png' %}" alt="Brand 1">
+        </div>
+
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand2.png' %}" alt="Brand 2">
+        </div>
+
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand3.png' %}" alt="Brand 3">
+        </div>
+
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand4.png' %}" alt="Brand 4">
+        </div>
+
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand5.png' %}" alt="Brand 5">
+        </div>
+
+        <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/brands/brand6.png' %}" alt="Brand 6">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".brandsSwiper", {
+      slidesPerView: 6,
+      spaceBetween: 30,
+      loop: true,
+      speed: 2500,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false
+      },
+      allowTouchMove: true,
+      breakpoints: {
+        0:    { slidesPerView: 2.5, spaceBetween: 18 },
+        576:  { slidesPerView: 3.5, spaceBetween: 20 },
+        768:  { slidesPerView: 4.5, spaceBetween: 24 },
+        992:  { slidesPerView: 6,   spaceBetween: 30 }
+      }
+    });
+  });
+</script>
+<section class="video-section-full">
+  <div class="video-wrapper-full">
+    <video autoplay muted loop playsinline>
+      <source src="{% static 'videos/glamvibe-mood.mp4' %}" type="video/mp4">
+    </video>
+  </div>
+</section>
 {% endblock %}
