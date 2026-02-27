@@ -1,0 +1,167 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Contact | GlamVibe{% endblock %}
+
+{% block content %}
+<section class="contact-page py-5">
+
+  <!-- Hero -->
+  <header class="container text-center mb-5">
+    <h1 class="contact-title">Contact Us</h1>
+    <p class="contact-subtitle text-muted">
+      We’d love to hear from you. Send a message and we’ll get back to you as soon as possible.
+    </p>
+
+    <div class="contact-hero-line"></div>
+  </header>
+
+  <div class="container">
+
+    <!-- Main: Form + Info -->
+    <div class="row g-4 align-items-stretch mb-5">
+
+      <!-- Form -->
+      <div class="col-lg-7">
+        <div class="contact-card">
+          <h5 class="contact-card-title">Send Us a Message</h5>
+          <p class="contact-card-subtitle text-muted mb-4">
+            Questions, collaborations, or feedback — we’re here.
+          </p>
+
+          <form method="post" class="contact-form">
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control contact-input" placeholder="Your name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control contact-input" placeholder="you@email.com" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Subject</label>
+                <input type="text" name="subject" class="form-control contact-input" placeholder="How can we help?" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea name="message" rows="5" class="form-control contact-input" placeholder="Write your message..." required></textarea>
+              </div>
+
+              <div class="col-12 d-flex align-items-center justify-content-between gap-3 flex-wrap mt-2">
+                <p class="small text-muted mb-0">
+                  By sending this message you agree to be contacted back by email.
+                </p>
+                <button type="submit" class="btn contact-btn">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="col-lg-5">
+        <div class="contact-card contact-card--soft">
+          <h5 class="contact-card-title">Contact Details</h5>
+          <p class="text-muted mb-4">
+            For partnerships and business inquiries, use the details below.
+          </p>
+
+          <div class="contact-info">
+            <div class="info-item">
+              <p class="info-label">Email</p>
+              <a class="info-value" href="mailto:hello@glamvibe.com">hello@glamvibe.com</a>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">Phone</p>
+              <a class="info-value" href="tel:+355000000000">+355 00 000 0000</a>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">Location</p>
+              <p class="info-value mb-0">Tirana, Albania</p>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">Socials</p>
+              <div class="socials">
+                <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                <a href="#" class="social-link" aria-label="TikTok">TikTok</a>
+                <a href="#" class="social-link" aria-label="Pinterest">Pinterest</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            <span class="note-dot"></span>
+            <span class="small">
+              We usually reply within 24–48 hours.
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-wrap">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div>
+          <h6 class="section-eyebrow mb-2">FAQ</h6>
+          <h5 class="mb-0 faq-title">Quick Answers</h5>
+        </div>
+        <p class="text-muted small mb-0">
+          Common questions about collaborations and support.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-4">
+          <button class="faq-item" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            <span>How can I collaborate with GlamVibe?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div id="faq1" class="collapse">
+            <div class="faq-answer">
+              Send us a message with your brand/portfolio and a short collaboration idea.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <button class="faq-item" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            <span>Do you accept guest posts?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div id="faq2" class="collapse">
+            <div class="faq-answer">
+              Yes — we accept selected guest content that matches our visual and editorial style.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <button class="faq-item" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            <span>When will the shop be available?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div id="faq3" class="collapse">
+            <div class="faq-answer">
+              The shop is in development. We’ll announce the launch on our social channels.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>
+{% endblock %}

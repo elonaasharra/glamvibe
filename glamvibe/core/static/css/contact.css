@@ -1,0 +1,210 @@
+/* =========================
+   GlamVibe Contact Page
+   ========================= */
+
+:root{
+  --gv-beige: #F3EEE7;
+  --gv-cream: #FAF8F4;
+  --gv-brown: #5A4636;
+  --gv-gold:  #C9A227;
+
+  --gv-ink:   #1e1e1e;
+  --gv-muted: #777;
+
+  --gv-border: rgba(0,0,0,.10);
+}
+
+/* Hero */
+.contact-title{
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--gv-brown);
+  letter-spacing: .3px;
+  margin-bottom: 14px;
+}
+
+.contact-subtitle{
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.contact-hero-line{
+  width: 60px;
+  height: 2px;
+  background: var(--gv-gold);
+  margin: 28px auto 0 auto;
+  opacity: .6;
+}
+
+/* Cards */
+.contact-card{
+  height: 100%;
+  background: var(--gv-cream);
+  border: 1px solid rgba(201,162,39,.18);
+  border-radius: 18px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before{
+  content:"";
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(circle at top, rgba(201,162,39,.10), transparent 60%);
+  opacity: .35;
+  pointer-events: none;
+}
+
+.contact-card--soft{
+  background: rgba(243,238,231,.65);
+  border-color: rgba(201,162,39,.22);
+}
+
+.contact-card-title{
+  font-family: 'Playfair Display', serif;
+  color: var(--gv-brown);
+  margin-bottom: 6px;
+}
+
+.contact-card-subtitle{
+  margin-bottom: 0;
+}
+
+/* Inputs */
+.contact-input{
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,.12) !important;
+  padding: 12px 12px !important;
+}
+
+.contact-input:focus{
+  border-color: rgba(201,162,39,.55) !important;
+  box-shadow: 0 0 0 .2rem rgba(201,162,39,.15) !important;
+}
+
+/* Button */
+.contact-btn{
+  background: var(--gv-brown) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+}
+
+.contact-btn:hover{
+  background: #4b3a2d !important;
+}
+
+/* Info */
+.contact-info .info-item{
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.contact-info .info-item:last-child{
+  border-bottom: none;
+}
+
+.info-label{
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(90,70,54,.70);
+  margin-bottom: 6px;
+}
+
+.info-value{
+  color: var(--gv-ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.info-value:hover{
+  color: var(--gv-brown);
+  text-decoration: underline;
+}
+
+.socials{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-link{
+  font-size: 14px;
+  color: var(--gv-brown);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,162,39,.35);
+}
+
+.social-link:hover{
+  color: #4b3a2d;
+  border-bottom-color: rgba(201,162,39,.65);
+}
+
+/* Note */
+.contact-note{
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(30,30,30,.75);
+}
+
+.note-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gv-gold);
+  opacity: .7;
+}
+
+/* FAQ */
+.faq-wrap{
+  background: rgba(243,238,231,.55);
+  border: 1px solid rgba(201,162,39,.15);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.faq-title{
+  font-family: 'Playfair Display', serif;
+  color: var(--gv-brown);
+}
+
+.faq-item{
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  padding: 14px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-item:hover{
+  border-color: rgba(201,162,39,.35);
+}
+
+.faq-plus{
+  font-weight: 700;
+  color: rgba(90,70,54,.70);
+}
+
+.faq-answer{
+  padding: 12px 14px 0 14px;
+  color: rgba(30,30,30,.72);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  .contact-title{ font-size: 32px; }
+  .contact-card{ padding: 20px; }
+}
