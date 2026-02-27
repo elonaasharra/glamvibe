@@ -1,0 +1,231 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}About Page | GlamVibe{% endblock %}
+
+{% block content %}
+<section class="about-page py-5">
+
+  <!-- 1) Hero -->
+<header class="container text-center mb-5"
+        style="padding:60px 20px;">
+
+  <h1 style="
+      font-family:'Playfair Display', serif;
+      font-size:42px;
+      font-weight:600;
+      color:#5A4636;
+      margin-bottom:18px;
+      letter-spacing:.3px;">
+    About GlamVibe
+  </h1>
+
+  <p style="
+      max-width:720px;
+      margin:0 auto;
+      font-size:16px;
+      line-height:1.8;
+      color:#555;">
+
+    GlamVibe is a fashion magazine & visual brand where design meets style.
+    <br><br>
+    <span style="
+        font-weight:600;
+        color:#5A4636;">
+        “Fashion starts where you express yourself.”
+    </span>
+
+  </p>
+
+  <div style="
+      width:60px;
+      height:2px;
+      background:#C9A227;
+      margin:28px auto 0 auto;
+      opacity:.6;">
+  </div>
+
+</header>
+
+  <div class="container">
+
+    <!-- 2) Our Story -->
+    <div class="row align-items-center g-4 mb-5">
+      <div class="col-lg-6">
+        <figure class="media media--lg">
+          <img
+            src="{% static 'images/ourStory.png' %}"
+            class="media__img"
+            alt="GlamVibe Editorial Story">
+        </figure>
+      </div>
+
+      <div class="col-lg-6">
+        <h6 class="section-eyebrow">OUR STORY</h6>
+        <p class="text-muted mb-0">
+          GlamVibe was created as a curated digital space for people who love fashion, aesthetics, and strong visual identity.
+          We believe style is not a trend you follow — it’s a language you build. That’s why every layout, typography choice,
+          and editorial detail is designed to feel intentional, minimal, and premium.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3) What do we offer -->
+    <div class="row align-items-center g-4 mb-5">
+      <div class="col-lg-6 order-2 order-lg-1">
+        <h6 class="section-eyebrow">WHAT DO WE OFFER</h6>
+        <p class="text-muted mb-0">
+          GlamVibe brings together <span class="fw-semibold">editorials</span>, <span class="fw-semibold">trend & style insights</span>,
+          and <span class="fw-semibold">curated fashion pieces</span> — all in one platform.
+          You’ll find visual stories, inspiring articles, and (soon) a shop experience built around “shop the look” moments.
+          For now, we’re building the foundation with a strong design system and a clear editorial direction.
+        </p>
+      </div>
+
+      <div class="col-lg-6 order-1 order-lg-2">
+        <!-- Placeholder now, image later -->
+        <figure class="media media--sm">
+
+          <img src="{% static 'images/whatDoWeOffer.png' %}" class="media__img" alt="What we offer">
+          <div class="media__placeholder">
+            <span>Image placeholder</span>
+          </div>
+        </figure>
+      </div>
+    </div>
+<!-- Mission & Vision -->
+<section class="mission-vision py-5 my-5">
+  <div class="container text-center">
+
+    <h6 class="section-eyebrow">MISSION & VISION</h6>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-8">
+
+        <div class="mv-item">
+          <h3 class="mv-title">Mission</h3>
+          <p class="mv-text">
+            To inspire conscious style through curated editorials and refined aesthetics,
+            creating a platform where fashion becomes a form of personal expression.
+          </p>
+        </div>
+
+        <div class="mv-line"></div>
+
+        <div class="mv-item">
+          <h3 class="mv-title">Vision</h3>
+          <p class="mv-text">
+            To evolve into a modern fashion destination where magazine, blog,
+            and curated shopping blend into one elevated digital experience.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- 4) Partnerships -->
+    <div class="text-center mb-4">
+        <h6 class="section-eyebrow">PARTNERSHIPS</h6>
+      <p class="text-muted small mb-0">
+        We collaborate with emerging designers, brands, and creators who share a love for authenticity and aesthetics.
+      </p>
+    </div>
+
+    <div class="row justify-content-center g-4 mb-5">
+      <div class="col-6 col-md-3 text-center">
+        <div class="partner-circle mx-auto">
+
+         <img src="{% static 'images/partnership1.png' %}" class="circle__img" alt="Partner">
+        </div>
+        <p class="text-muted small mt-3 mb-0">
+          Designers & fashion studios looking to showcase collections through editorial storytelling.
+        </p>
+      </div>
+
+      <div class="col-6 col-md-3 text-center">
+        <div class="partner-circle mx-auto">
+            <img src="{% static 'images/partnership1.png' %}" class="circle__img" alt="Partner">
+
+        </div>
+        <p class="text-muted small mt-3 mb-0">
+          Boutique brands that value clean visuals, strong identity, and curated product drops.
+        </p>
+      </div>
+
+      <div class="col-6 col-md-3 text-center">
+        <div class="partner-circle mx-auto">
+        <img src="{% static 'images/partnership1.png' %}" class="circle__img" alt="Partner">
+
+        </div>
+        <p class="text-muted small mt-3 mb-0">
+          Influencers & creators who want content collaborations with an editorial-first approach.
+        </p>
+      </div>
+
+      <div class="col-6 col-md-3 text-center">
+        <div class="partner-circle mx-auto">
+         <img src="{% static 'images/partnership1.png' %}" class="circle__img" alt="Partner">
+
+        </div>
+        <p class="text-muted small mt-3 mb-0">
+          Creative professionals (photo, makeup, styling) ready to build visual projects together.
+        </p>
+      </div>
+    </div>
+<!-- Signature Quote -->
+<section class="signature-quote my-5">
+  <div class="container">
+    <div class="quote-box text-center">
+      <p class="quote-text mb-2">
+        “Fashion begins where you express yourself.”
+      </p>
+      <span class="quote-subtext">
+        GlamVibe — Inspiration in Every Look
+      </span>
+    </div>
+  </div>
+</section>
+    <!-- 5) What makes us special -->
+<div class="text-center mb-4">
+  <h6 class="section-eyebrow">WHAT MAKES US SPECIAL</h6>
+  <p class="text-muted small mb-0">
+    A modern platform built on identity, aesthetics, and a community that loves style with meaning.
+  </p>
+</div>
+
+<div class="row justify-content-center g-3">
+  <div class="col-10 col-md-4 col-lg-3">
+    <div class="reason-card text-center">
+      <div class="reason-accent"></div>
+      <h6 class="reason-title mb-2">Authentic Style</h6>
+      <p class="reason-text mb-0">
+        We celebrate individuality — your style is your signature.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-10 col-md-4 col-lg-3">
+    <div class="reason-card text-center">
+      <div class="reason-accent"></div>
+      <h6 class="reason-title mb-2">Visual First</h6>
+      <p class="reason-text mb-0">
+        Minimal, curated, premium design — every detail matters.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-10 col-md-4 col-lg-3">
+    <div class="reason-card text-center">
+      <div class="reason-accent"></div>
+      <h6 class="reason-title mb-2">Trends with Purpose</h6>
+      <p class="reason-text mb-0">
+        We follow innovation, but we filter it through taste and clarity.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

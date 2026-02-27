@@ -10,7 +10,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/static/images/GlamVibeLogo.png") center/cover no-repeat;
+  background: url("/static/images/footer.png") center/cover no-repeat;
   filter: blur(10px);
   transform: scale(1.08);
   opacity: 0.7;  /* e lehtë */

@@ -1,0 +1,278 @@
+/* =========================
+   GlamVibe About Page (Future-proof)
+   ========================= */
+
+/* 1) Brand palette (bezh / kafe / gold) */
+:root{
+  --gv-beige: #F3EEE7;
+  --gv-brown: #5A4636;
+  --gv-gold:  #C9A227;
+
+  --gv-ink:   #1e1e1e;
+  --gv-muted: #777;
+
+  --gv-card: rgba(0,0,0,.05);
+  --gv-border: rgba(0,0,0,.10);
+}
+
+/* 2) Typography */
+
+
+.section-eyebrow{
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: rgba(90,70,54,.75); /* soft brown */
+  margin-bottom: 14px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-eyebrow::after{
+  content: "";
+  display: block;
+  width: 38px;
+  height: 1.5px;
+  background: #C9A227; /* subtle gold */
+  margin: 8px auto 0 auto;
+  opacity: .6;
+}
+
+/* =========================
+   3) UNIVERSAL MEDIA COMPONENT
+   - ensures images always stay inside the container
+   - reuse everywhere (about, home, editorial cards, etc.)
+   ========================= */
+
+.media{
+  position: relative;
+  border-radius: 18px;
+  background: var(--gv-card);
+  overflow: hidden;              /* KEY: keeps image inside */
+  border: 1px solid var(--gv-border);
+}
+
+/* sizes */
+.media--lg{ height: 220px; }
+.media--sm{ height: 170px; }
+
+/* if you prefer responsive aspect ratio instead of fixed heights:
+.media--lg{ height: auto; aspect-ratio: 16/10; }
+.media--sm{ height: auto; aspect-ratio: 4/3; }
+*/
+
+.media__img{
+  width: 100%;
+  height: 100%;
+  display: block;                /* KEY: removes extra gap under img */
+  object-fit: cover;             /* KEY: fills container without distortion */
+  object-position: center;       /* center crop */
+}
+
+/* If in the future you want an image NOT to be cropped:
+   Add class="media__img is-contain" to img */
+.media__img.is-contain{
+  object-fit: contain;
+  background: var(--gv-beige);
+}
+
+/* Optional: make top-focused crops (portraits, faces) */
+.media__img.is-top{
+  object-position: top center;
+}
+
+/* Optional: subtle overlay for editorial feel */
+.media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.12) 100%);
+  pointer-events:none;
+  opacity: .35;
+}
+
+/* Placeholder when no image yet */
+.media__placeholder{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: rgba(0,0,0,.45);
+  font-size: 14px;
+  letter-spacing: .2px;
+  background: linear-gradient(135deg, rgba(243,238,231,.65), rgba(0,0,0,.03));
+}
+
+/* =========================
+   4) Partnerships circles
+   ========================= */
+
+.partner-circle{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--gv-card);
+  border: 1px solid var(--gv-border);
+  overflow: hidden;              /* if you add logos later */
+  display: grid;
+  place-items: center;
+}
+
+/* future-proof: if you add an <img> inside partner-circle */
+.circle__img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;             /* or contain if you want full logo */
+  object-position: center;
+}
+
+/* =========================
+   5) What makes us special (Luxury minimal)
+   ========================= */
+
+.reason-card{
+  position: relative;
+  padding: 18px 18px;
+  border-radius: 16px;
+  background: rgba(243,238,231,.65);           /* beige soft */
+  border: 1px solid rgba(201,162,39,.18);      /* subtle gold */
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  overflow: hidden;
+}
+
+/* very subtle glow */
+.reason-card::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  background: radial-gradient(circle at top, rgba(201,162,39,.12), transparent 60%);
+  opacity: .35;
+  pointer-events:none;
+}
+
+.reason-accent{
+  width: 46px;
+  height: 2px;
+  background: var(--gv-gold);
+  margin: 0 auto 14px auto;
+  opacity: .65;
+}
+
+.reason-title{
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--gv-brown);
+  letter-spacing: .2px;
+}
+
+.reason-text{
+  color: rgba(30,30,30,.70);
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+/* hover luxury */
+.reason-card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(201,162,39,.35);
+  box-shadow: 0 10px 22px rgba(0,0,0,.08);
+}
+
+/* Mobile tweaks */
+@media (max-width: 575px){
+  .reason-card{ padding: 16px 16px; }
+  .reason-text{ font-size: 14px; }
+}
+/* =========================
+   6) Small responsiveness tweaks
+   ========================= */
+
+@media (max-width: 575px){
+  .media--lg{ height: 200px; }
+  .media--sm{ height: 160px; }
+  .partner-circle{ width: 96px; height: 96px; }
+}
+/* ===== Mission & Vision - Minimal Luxury ===== */
+
+.mission-vision{
+  background: #FAF8F4;   /* cream shumë e butë */
+  border-radius: 20px;
+  padding: 60px 20px;
+}
+
+.mv-item{
+  margin: 35px 0;
+}
+
+.mv-title{
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #5A4636; /* brown elegant */
+  margin-bottom: 14px;
+}
+
+.mv-text{
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.mv-line{
+  width: 50px;
+  height: 1.5px;
+  background: #C9A227; /* subtle gold */
+  margin: 25px auto;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  .mv-title{
+    font-size: 22px;
+  }
+}
+
+/* ===== Signature Quote - Minimal Luxury ===== */
+
+.signature-quote .quote-box{
+  background: #F3EEE7; /* soft beige */
+  border-radius: 20px;
+  padding: 50px 20px;
+  position: relative;
+  border: 1px solid rgba(201,162,39,.25); /* subtle gold */
+}
+
+.signature-quote .quote-box::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(201,162,39,.08), transparent 60%);
+  pointer-events: none;
+}
+
+.quote-text{
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #5A4636; /* warm brown */
+  line-height: 1.3;
+  margin: 0;
+}
+
+.quote-subtext{
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(90,70,54,.75);
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  .quote-text{ font-size: 22px; }
+  .signature-quote .quote-box{ padding: 38px 18px; }
+}
