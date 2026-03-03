@@ -1,6 +1,33 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
+{% load static %}
+
 {% block title %}Shop | GlamVibe{% endblock %}
 
 {% block content %}
-<h1>Shop Page</h1>
+<section class="container py-5">
+
+    <h2 class="mb-4 text-center">Shop</h2>
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+
+                    {% if product.main_image %}
+                        <img src="{{ product.main_image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+
+                    <div class="card-body text-center">
+                        <h5>{{ product.name }}</h5>
+                        <p>${{ product.price }}</p>
+                    </div>
+
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No products available.</p>
+        {% endfor %}
+    </div>
+
+</section>
 {% endblock %}
