@@ -5,4 +5,5 @@ app_name = 'shop'
 
 urlpatterns = [
     path('', views.shop_home, name='shop_home'),
+
 ]
