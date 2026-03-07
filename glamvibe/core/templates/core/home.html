@@ -133,7 +133,6 @@
 <section class="container my-5">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="section-title m-0 text-lg-start text-center">BEST SELLERS</h2>
-    <!-- Shigjeta (unikë për këtë slider) -->
     <div class="d-none d-lg-flex gap-2">
       <button class="bestPrev btn btn-light" type="button" aria-label="Prev">‹</button>
       <button class="bestNext btn btn-light" type="button" aria-label="Next">›</button>
@@ -148,10 +147,11 @@
 
       <div class="product-card">
 
-        <div class="product-img">
+      <div class="product-img">
+        <a href="{% url 'shop:shop_home' %}">
           <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
-        </div>
-
+        </a>
+      </div>
         <div class="product-info">
           <div class="product-name">{{ product.name }}</div>
 
@@ -170,7 +170,6 @@
 
   </div>
 </div>
-  <!-- Shigjeta për mobile/tablet (opsionale) -->
   <div class="d-flex justify-content-center gap-2 mt-3 d-lg-none">
     <button class="bestPrev btn btn-light" type="button" aria-label="Prev">‹</button>
     <button class="bestNext btn btn-light" type="button" aria-label="Next">›</button>
@@ -182,7 +181,7 @@
     new Swiper(".bestSwiper", {
       slidesPerView: 5,
       spaceBetween: 18,
-      slidesPerGroup: 1, //  lëviz 1 nga 1
+      slidesPerGroup: 1,
       loop: false,
       navigation: {
         nextEl: ".bestNext",

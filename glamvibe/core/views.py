@@ -12,6 +12,8 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 
+from blog.models import BlogPost
+
 def home(request):
 
     best_sellers = Product.objects.annotate(
@@ -23,7 +25,12 @@ def home(request):
         "-created_at"
     )[:4]
 
+    featured_opinion = BlogPost.objects.order_by('-likes').first()
+    side_opinions = BlogPost.objects.order_by('-likes')[1:3]
+
     return render(request, "core/home.html", {
         "best_sellers": best_sellers,
-        "most_popular": most_popular
+        "most_popular": most_popular,
+        "featured_opinion": featured_opinion,
+        "side_opinions": side_opinions,
     })
