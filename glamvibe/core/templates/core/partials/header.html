@@ -17,17 +17,35 @@
       </a>
 
       <!-- Cart -->
-      <a href="#" class="text-dark fs-5 position-relative">
-        <i class="bi bi-cart3"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-
-        </span>
-      </a>
+     <a href="{% url 'shop:cart' %}" class="text-dark fs-5 position-relative">
+       <i class="bi bi-cart3"></i>
+       <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+         {{ cart_count }}
+       </span>
+     </a>
 
       <!-- Login -->
-      <a href="#" class="text-dark small text-decoration-none">
-        Login / Register
-      </a>
+     {% if user.is_authenticated %}
+
+<span class="text-dark small">
+  Hi, {{ user.username }}
+</span>
+
+<a href="{% url 'logout' %}" class="text-dark small text-decoration-none">
+  Logout
+</a>
+
+{% else %}
+
+<a href="{% url 'login' %}" class="text-dark small text-decoration-none">
+  Login
+</a>
+
+<a href="{% url 'register' %}" class="text-dark small text-decoration-none">
+  Register
+</a>
+
+{% endif %}
 
       <!-- Hamburger Button -->
       <button class="navbar-toggler border-0" type="button"

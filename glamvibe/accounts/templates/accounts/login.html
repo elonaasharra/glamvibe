@@ -1,0 +1,103 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Login | GlamVibe{% endblock %}
+
+{% block content %}
+
+<section class="login-page py-5">
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-5">
+
+<div class="contact-card text-center">
+
+<h3 class="mb-2">Welcome Back</h3>
+<p class="text-muted mb-4">
+Sign in to continue to GlamVibe
+</p>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+<form method="POST" id="loginForm">
+
+{% csrf_token %}
+
+<div class="mb-3 text-start">
+<label class="form-label">Email</label>
+<input type="email" name="email"
+class="form-control contact-input"
+placeholder="you@email.com" required>
+</div>
+
+<div class="mb-3 text-start">
+<label class="form-label">Password</label>
+<input type="password" name="password"
+class="form-control contact-input"
+placeholder="Your password" required>
+</div>
+
+<div class="d-grid mb-3">
+<button type="submit" class="btn contact-btn">
+Login
+</button>
+</div>
+
+<p class="small text-muted mb-0">
+Don't have an account?
+<a href="{% url 'register' %}" class="fw-semibold">
+Sign Up
+</a>
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+let email = document.querySelector("input[name='email']").value.trim();
+let password = document.querySelector("input[name='password']").value.trim();
+let username = email.split("@")[0]; // përdor pjesën para @
+
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,}$/;
+
+if(!emailRegex.test(email)){
+    alert("Please enter a valid email address.");
+    e.preventDefault();
+    return;
+}
+
+if(!passwordRegex.test(password)){
+    alert("Password must contain at least 8 characters, one uppercase letter, one number and one symbol.");
+    e.preventDefault();
+    return;
+}
+
+if(password.toLowerCase() === username.toLowerCase()){
+    alert("Password cannot be the same as your username.");
+    e.preventDefault();
+    return;
+}
+
+});
+
+</script>

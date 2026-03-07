@@ -1,0 +1,13 @@
+
+{% extends 'core/base.html' %}
+{% block title %}Blog | GlamVibe{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+
+<img src="{{ post.image.url }}">
+
+<p>{{ post.content }}</p>
+
+<p>❤ {{ post.likes }}</p>
+{% endblock %}

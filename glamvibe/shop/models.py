@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-
-
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True)
@@ -17,8 +16,6 @@ class Category(models.Model):
         if self.name and not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
-
-
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -46,8 +43,8 @@ class Product(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-
 class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     completed = models.BooleanField(default=False, null=True, blank=True)
 

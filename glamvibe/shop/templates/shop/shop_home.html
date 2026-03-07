@@ -21,6 +21,9 @@
                         <h5>{{ product.name }}</h5>
                         <p>${{ product.description }}</p>
                         <p>${{ product.price }}</p>
+                        <a href="{% url 'shop:add_to_cart' product.id %}" class="btn btn-dark mt-2">
+                            Add to Cart
+                        </a>
 
 
                     </div>
