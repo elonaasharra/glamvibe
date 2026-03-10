@@ -9,9 +9,7 @@
 <h2 class="mb-4">Your Cart</h2>
 
 {% if items %}
-
 <table class="table align-middle">
-
 <thead>
 <tr>
 <th>Product</th>
@@ -20,39 +18,23 @@
 <th>Action</th>
 </tr>
 </thead>
-
 <tbody>
-
 {% for item in items %}
-
 <tr>
-
 <td>{{ item.product.name }}</td>
-
 <td>${{ item.product.price }}</td>
-
 <td>{{ item.quantity }}</td>
-
 <td>
 <a href="{% url 'shop:remove_from_cart' item.id %}" class="btn btn-sm btn-danger">
 Remove
 </a>
 </td>
-
 </tr>
-
 {% endfor %}
-
 </tbody>
-
 </table>
-
 {% else %}
-
 <p>Your cart is empty.</p>
-
 {% endif %}
-
 </div>
-
 {% endblock %}
