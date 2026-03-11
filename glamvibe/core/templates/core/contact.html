@@ -25,30 +25,43 @@
         <div class="contact-card">
           <h5 class="contact-card-title">Send Us a Message</h5>
           <p class="contact-card-subtitle text-muted mb-4">
-            Questions, collaborations, or feedback — we’re here.
+            Questions, collaborations, or feedback , we’re here.
           </p>
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-warning">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
 
-          <form method="post" class="contact-form">
+          <form method="post" class="contact-form" novalidate>
             {% csrf_token %}
 
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control contact-input" placeholder="Your name" required>
+                <input type="text" name="name" class="form-control contact-input" placeholder="Enter your name "  required>
+                  <small class="text-danger error-name"></small>
+
               </div>
               <div class="col-md-6">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control contact-input" placeholder="you@email.com" required>
+                <input type="email" name="email" class="form-control contact-input" placeholder="name@email.com" required>
+                  <small class="text-danger error-email"></small>
               </div>
 
               <div class="col-12">
                 <label class="form-label">Subject</label>
                 <input type="text" name="subject" class="form-control contact-input" placeholder="How can we help?" required>
+                  <small class="text-danger error-subject"></small>
               </div>
 
               <div class="col-12">
                 <label class="form-label">Message</label>
-                <textarea name="message" rows="5" class="form-control contact-input" placeholder="Write your message..." required></textarea>
+                <textarea name="message" rows="5" class="form-control contact-input"  placeholder="Write your message..." required></textarea>
+                  <small class="text-danger error-message"></small>
+
               </div>
 
               <div class="col-12 d-flex align-items-center justify-content-between gap-3 flex-wrap mt-2">
@@ -143,7 +156,7 @@
           </button>
           <div id="faq2" class="collapse">
             <div class="faq-answer">
-              Yes — we accept selected guest content that matches our visual and editorial style.
+              Yes , we accept selected guest content that matches our visual and editorial style.
             </div>
           </div>
         </div>
@@ -164,4 +177,95 @@
 
   </div>
 </section>
+<style>
+
+.input-error{
+border:2px solid #dc3545 !important;
+}
+
+.input-success{
+border:2px solid #28a745 !important;
+}
+
+.text-danger{
+font-size:14px;
+}
+
+</style>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const form = document.querySelector(".contact-form");
+
+const nameInput = document.querySelector("[name='name']");
+const emailInput = document.querySelector("[name='email']");
+const subjectInput = document.querySelector("[name='subject']");
+const messageInput = document.querySelector("[name='message']");
+
+const nameError = document.querySelector(".error-name");
+const emailError = document.querySelector(".error-email");
+const subjectError = document.querySelector(".error-subject");
+const messageError = document.querySelector(".error-message");
+
+let nameRegex = /^[A-Za-z\s]{2,50}$/;
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+form.addEventListener("submit", function(e){
+
+let valid = true;
+
+
+nameError.textContent="";
+emailError.textContent = "";
+subjectError.textContent = "";
+messageError.textContent = "";
+
+nameInput.classList.remove("input-error","input-success");
+emailInput.classList.remove("input-error","input-success");
+subjectInput.classList.remove("input-error","input-success");
+messageInput.classList.remove("input-error","input-success");
+
+if(!nameRegex.test(nameInput.value.trim())){
+nameError.textContent = "Name must contain only letters.";
+nameInput.classList.add("input-error");
+valid = false;
+}else{
+nameInput.classList.add("input-success");
+}
+
+if(!emailRegex.test(emailInput.value.trim())){
+emailError.textContent = "Please enter a valid email.";
+emailInput.classList.add("input-error");
+valid = false;
+}else{
+emailInput.classList.add("input-success");
+}
+
+if(subjectInput.value.trim().length < 3){
+subjectError.textContent = "Subject must be at least 3 characters.";
+subjectInput.classList.add("input-error");
+valid = false;
+}else{
+subjectInput.classList.add("input-success");
+}
+
+if(messageInput.value.trim().length < 10){
+messageError.textContent = "Message must be at least 10 characters.";
+messageInput.classList.add("input-error");
+valid = false;
+}else{
+messageInput.classList.add("input-success");
+}
+
+if(!valid){
+e.preventDefault();
+}
+
+});
+
+});
+
+</script>
 {% endblock %}

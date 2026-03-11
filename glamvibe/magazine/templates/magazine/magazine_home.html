@@ -6,7 +6,25 @@
 <div class="container my-5">
 
   <h1 class="text-center mb-5">MAGAZINE</h1>
+<div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
 
+<a href="/magazine/"
+class="btn {% if not request.GET.category %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
+All
+</a>
+
+{% for category in categories %}
+
+<a href="?category={{ category.slug }}"
+class="btn {% if request.GET.category == category.slug %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
+
+{{ category.name }}
+
+</a>
+
+{% endfor %}
+
+</div>
   <div class="row g-4">
 
     {% for post in posts %}
