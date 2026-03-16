@@ -34,12 +34,30 @@ def create_post(request):
 
     return render(request, "blog/create_post.html", {"form": form})
 
+
+from django.http import JsonResponse
+
 @login_required
 def like_post(request, slug):
 
     post = get_object_or_404(BlogPost, slug=slug)
 
-    post.likes += 1
+    liked = False
+
+    if request.user in post.liked_by.all():
+        post.liked_by.remove(request.user)
+
+        if post.likes > 0:
+            post.likes -= 1
+
+    else:
+        post.liked_by.add(request.user)
+        post.likes += 1
+        liked = True
+
     post.save()
 
-    return redirect("blog:post_detail", slug=slug)
+    return JsonResponse({
+        "likes": post.likes,
+        "liked": liked
+    })

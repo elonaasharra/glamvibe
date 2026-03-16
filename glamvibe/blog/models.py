@@ -14,6 +14,7 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to='blog/')
     likes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    liked_by = models.ManyToManyField(User, related_name="liked_posts", blank=True)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.slug])

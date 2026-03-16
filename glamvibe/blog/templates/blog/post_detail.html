@@ -1,13 +1,91 @@
-
 {% extends 'core/base.html' %}
-{% block title %}Blog | GlamVibe{% endblock %}
+{% block title %}{{ post.title }} | GlamVibe{% endblock %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
 
-<img src="{{ post.image.url }}">
+<div class="container my-5">
 
-<p>{{ post.content }}</p>
+<div class="row justify-content-center">
 
-<p>❤ {{ post.likes }}</p>
+<div class="col-lg-8">
+
+<div class="card border-0 shadow-sm">
+
+<img src="{{ post.image.url }}" class="card-img-top" style="max-height:400px; object-fit:cover;">
+
+<div class="card-body">
+
+<h2 class="card-title mb-3">{{ post.title }}</h2>
+
+<p class="text-muted small">
+Posted by <strong>{{ post.author.username }}</strong> • {{ post.created_at|date:"F d, Y" }}
+</p>
+
+<hr>
+
+<p class="card-text" style="line-height:1.8;">
+{{ post.content }}
+</p>
+
+<div class="d-flex justify-content-between align-items-center mt-4">
+
+<a href="{% url 'blog:blog_home' %}" class="btn btn-outline-dark btn-sm">
+← Back to Blog
+</a>
+
+<button id="like-btn" data-slug="{{ post.slug }}" class="btn btn-light">
+
+{% if user in post.liked_by.all %}
+<i class="bi bi-heart-fill text-danger"></i>
+{% else %}
+<i class="bi bi-heart"></i>
+{% endif %}
+
+<span id="like-count">{{ post.likes }}</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("like-btn").addEventListener("click", function(){
+
+const slug = this.dataset.slug;
+
+fetch(`/blog/like/${slug}/`, {
+method: "POST",
+headers: {
+"X-CSRFToken": "{{ csrf_token }}"
+}
+})
+
+.then(response => response.json())
+
+.then(data => {
+
+document.getElementById("like-count").innerText = data.likes;
+
+if(data.liked){
+document.querySelector("#like-btn i").className = "bi bi-heart-fill text-danger";
+}else{
+document.querySelector("#like-btn i").className = "bi bi-heart";
+}
+
+});
+
+});
+
+</script>
+
 {% endblock %}
