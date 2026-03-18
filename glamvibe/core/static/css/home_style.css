@@ -437,23 +437,30 @@
   margin-bottom: 18px;
 }
 
+/* swiper container */
+.brandsSwiper{
+  width:100%;
+}
+
 .brand-slide{
   display:flex;
   justify-content:center;
   align-items:center;
-  height: 70px;
+  height:70px;
 }
 
+/* logos */
 .brand-slide img{
-  max-height: 40px;
-  max-width: 120px;
-  width: auto;
-  transition: opacity .2s ease, transform .2s ease;
+  height:40px;
+  width:auto;
+  object-fit:contain;
+  opacity:.8;
+  transition:opacity .2s ease, transform .2s ease;
 }
 
 .brand-slide img:hover{
-  opacity: 1;
-  transform: scale(1.05);
+  opacity:1;
+  transform:scale(1.05);
 }
 /* video section======================================================================================*/
 .video-section-full{

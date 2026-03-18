@@ -345,6 +345,10 @@
         </div>
 
         <div class="swiper-slide brand-slide">
+          <img src="{% static 'images/okaidi.png' %}" alt="Brand 4">
+        </div>
+
+        <div class="swiper-slide brand-slide">
           <img src="{% static 'images/sinsay.png' %}" alt="Brand 5">
         </div>
 
@@ -358,30 +362,38 @@
   </div>
 </section>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Swiper(".brandsSwiper", {
-      slidesPerView: 6,
-      spaceBetween: 30,
-      loop: true,
-      speed: 2500,
-      autoplay: {
-        delay: 0,
-        disableOnInteraction: false
-      },
-      allowTouchMove: true,
-      breakpoints: {
-        0:    { slidesPerView: 2.5, spaceBetween: 18 },
-        576:  { slidesPerView: 3.5, spaceBetween: 20 },
-        768:  { slidesPerView: 4.5, spaceBetween: 24 },
-        992:  { slidesPerView: 6,   spaceBetween: 30 }
-      }
-    });
+document.addEventListener("DOMContentLoaded", function () {
+
+  const brandsSwiper = new Swiper(".brandsSwiper", {
+    slidesPerView: 6,
+    spaceBetween: 30,
+    loop: true,
+    speed: 2500,
+    freeMode: true,
+
+    autoplay: {
+      delay: 10,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false
+    },
+
+    observer: true,
+    observeParents: true,
+
+    breakpoints: {
+      0:    { slidesPerView: 2.5, spaceBetween: 18 },
+      576:  { slidesPerView: 3.5, spaceBetween: 20 },
+      768:  { slidesPerView: 4.5, spaceBetween: 24 },
+      992:  { slidesPerView: 6,   spaceBetween: 30 }
+    }
   });
+
+});
 </script>
 <section class="video-section-full">
   <div class="video-wrapper-full">
     <video autoplay muted loop playsinline>
-      <source src="{% static 'videos/GlammVideo.mp4' %}" type="video/mp4">
+      <source src="{% static 'videos/GlammVibe111.mp4' %}" type="video/mp4">
     </video>
   </div>
 </section>

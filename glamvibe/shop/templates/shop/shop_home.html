@@ -4,10 +4,31 @@
 {% block title %}Shop | GlamVibe{% endblock %}
 
 {% block content %}
+<div id="cart-message"
+class="alert alert-success text-center position-fixed top-0 start-50 translate-middle-x mt-5 shadow"
+style="display:none; z-index:1050; width:300px;">
+Product added to cart
+</div>
 <section class="container py-5">
 
     <h2 class="mb-4 text-center">Shop</h2>
 
+
+<div class="text-center mb-4">
+
+    <a href="{% url 'shop:shop_home' %}"
+       class="btn {% if not request.GET.category %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
+       All
+    </a>
+
+    {% for category in categories %}
+        <a href="?category={{ category.slug }}"
+           class="btn {% if request.GET.category == category.slug %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+
+</div>
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 mb-4">
@@ -19,12 +40,11 @@
 
                     <div class="card-body text-center">
                         <h5>{{ product.name }}</h5>
-                        <p>${{ product.description }}</p>
                         <p>${{ product.price }}</p>
-                        <a href="{% url 'shop:add_to_cart' product.id %}" class="btn btn-dark mt-2">
-                            Add to Cart
+                        <a href="{% url 'shop:product_detail' product.slug %}" class="btn btn-outline-dark btn-sm mt-2">
+                            View Details
                         </a>
-
+                       <button class="btn btn-dark mt-2 add-to-cart" data-id="{{ product.id }}">Add to Cart</button>
 
                     </div>
 
@@ -36,4 +56,41 @@
     </div>
 
 </section>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const buttons = document.querySelectorAll(".add-to-cart");
+
+buttons.forEach(button => {
+
+button.addEventListener("click", function(){
+
+const productId = this.dataset.id;
+
+fetch(`/shop/add-to-cart/${productId}/`)
+.then(response => response.json())
+.then(data => {
+
+document.getElementById("cart-count").innerText = data.cart_count;
+
+const msg = document.getElementById("cart-message");
+
+if(msg){
+msg.style.display = "block";
+
+setTimeout(function(){
+msg.style.display = "none";
+},2000);
+}
+
+});
+
+});
+
+});
+
+});
+
+</script>
 {% endblock %}

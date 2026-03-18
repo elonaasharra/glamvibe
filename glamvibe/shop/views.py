@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Order, OrderItem
-
+from .models import Product, Order, OrderItem, Category
+from django.http import JsonResponse
 
 def shop_home(request):
 
     products = Product.objects.all()
+    categories = Category.objects.all()
+
+    category_slug = request.GET.get("category")
+
+    if category_slug:
+        products = products.filter(categories__slug=category_slug)
 
     cart_count = 0
 
@@ -15,9 +21,11 @@ def shop_home(request):
 
     return render(request, 'shop/shop_home.html', {
         'products': products,
+        'categories': categories,
         'cart_count': cart_count
     })
 
+from django.http import JsonResponse
 
 def add_to_cart(request, product_id):
 
@@ -37,8 +45,11 @@ def add_to_cart(request, product_id):
         order_item.quantity += 1
         order_item.save()
 
-    return redirect("shop:shop_home")
+    cart_count = sum(item.quantity for item in order.items.all())
 
+    return JsonResponse({
+        "cart_count": cart_count
+    })
 def cart_view(request):
 
     order = Order.objects.filter(user=request.user, completed=False).first()
@@ -67,3 +78,19 @@ def remove_from_cart(request, item_id):
 
     return redirect("shop:cart")
 
+def product_detail(request, slug):
+
+    product = get_object_or_404(Product, slug=slug)
+
+    cart_count = 0
+
+    if request.user.is_authenticated:
+        order = Order.objects.filter(user=request.user, completed=False).first()
+
+        if order:
+            cart_count = sum(item.quantity for item in order.items.all())
+
+    return render(request, "shop/product_detail.html", {
+        "product": product,
+        "cart_count": cart_count
+    })

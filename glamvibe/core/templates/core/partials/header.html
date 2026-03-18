@@ -19,9 +19,9 @@
       <!-- Cart -->
      <a href="{% url 'shop:cart' %}" class="text-dark fs-5 position-relative">
        <i class="bi bi-cart3"></i>
-       <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-         {{ cart_count }}
-       </span>
+    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+{{ cart_count }}
+</span>
      </a>
 
       <!-- Login -->
