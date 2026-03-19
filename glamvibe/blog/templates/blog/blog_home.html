@@ -3,113 +3,119 @@
 
 {% block content %}
 
-<div class="container my-5">
+<section class="container py-5">
 
-<h1 class="text-center mb-5">BLOG</h1>
+  <!-- HERO -->
+  <header class="page-hero">
+    <h1 class="page-title">Blog</h1>
 
-{% if user.is_authenticated %}
-<div class="text-center mb-4">
-<a href="{% url 'blog:create_post' %}" class="btn btn-dark">
-Create Post
+    <p class="page-subtitle">
+      Thoughts, stories and ideas from our community.
+    </p>
+
+    <div class="page-divider"></div>
+  </header>
+
+  <!-- CREATE POST -->
+  {% if user.is_authenticated %}
+  <div class="text-center mb-5">
+    <a href="{% url 'blog:create_post' %}" class="link-btn">
+      + Create Post
+    </a>
+  </div>
+  {% endif %}
+
+  <!-- POSTS -->
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-md-4 mb-5">
+
+        <div class="article-card">
+
+          <a href="{{ post.get_absolute_url }}">
+
+            <div class="article-img">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+
+          </a>
+
+          <div class="article-info text-center">
+
+            <div class="article-title">
+              <a href="{{ post.get_absolute_url }}" class="article-title">
+  {{ post.title }}
 </a>
-</div>
-{% endif %}
+            </div>
 
-<div class="row g-4">
+            <div class="article-date">
+              {{ post.created_at|date:"F d, Y" }} • {{ post.author.username }}
+            </div>
 
-{% for post in posts %}
+            <div class="article-excerpt">
+              {{ post.excerpt|truncatewords:20 }}
+            </div>
 
-<div class="col-md-4">
+            <div class="article-actions">
 
-<div class="card h-100 border-0 shadow-sm">
+              <a href="{{ post.get_absolute_url }}" class="view-details">
+                Read Post
+              </a>
 
-<a href="{{ post.get_absolute_url }}">
+              <button class="like-btn" data-slug="{{ post.slug }}">
 
-<img src="{{ post.image.url }}" class="card-img-top" style="height:220px; object-fit:cover;">
+                <i class="like-icon {% if user in post.liked_by.all %}bi bi-heart-fill text-danger{% else %}bi bi-heart{% endif %}"></i>
 
-</a>
+                <span class="like-count">{{ post.likes }}</span>
 
-<div class="card-body">
+              </button>
 
-<h5 class="card-title">
-<a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">
-{{ post.title }}
-</a>
-</h5>
+            </div>
 
-<p class="text-muted small mb-2">
-Posted by {{ post.author.username }} • {{ post.created_at|date:"F d, Y" }}
-</p>
+          </div>
 
-<p class="card-text">
-{{ post.excerpt|truncatewords:20 }}
-</p>
+        </div>
 
-<div class="d-flex justify-content-between align-items-center mt-3">
+      </div>
+    {% endfor %}
+  </div>
 
-<a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark btn-sm">
-Read Post
-</a>
+</section>
 
-<button class="like-btn" data-slug="{{ post.slug }}" style="background:none;border:none;font-size:18px;cursor:pointer;">
-
-<i class="like-icon {% if user in post.liked_by.all %}bi bi-heart-fill text-danger{% else %}bi bi-heart{% endif %}"></i>
-
-<span class="like-count">{{ post.likes }}</span>
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-{% endfor %}
-
-</div>
-
-</div>
+<!-- JS (pa ndryshim) -->
 <script>
-
 document.querySelectorAll(".like-btn").forEach(button => {
 
-button.addEventListener("click", function(){
+  button.addEventListener("click", function(){
 
-const slug = this.dataset.slug
-const likeCount = this.querySelector(".like-count")
-const icon = this.querySelector(".like-icon")
+    const slug = this.dataset.slug
+    const likeCount = this.querySelector(".like-count")
+    const icon = this.querySelector(".like-icon")
 
-fetch(`/blog/like/${slug}/`, {
-method: "POST",
-headers: {
-"X-CSRFToken": "{{ csrf_token }}"
-}
-})
+    fetch(`/blog/like/${slug}/`, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
 
-.then(response => response.json())
+      likeCount.textContent = data.likes
 
-.then(data => {
+      if(data.liked){
+        icon.classList.remove("bi-heart")
+        icon.classList.add("bi-heart-fill","text-danger")
+      } else {
+        icon.classList.remove("bi-heart-fill","text-danger")
+        icon.classList.add("bi-heart")
+      }
 
-likeCount.textContent = data.likes
+    })
 
-if(data.liked){
-icon.classList.remove("bi-heart")
-icon.classList.add("bi-heart-fill","text-danger")
-}
-else{
-icon.classList.remove("bi-heart-fill","text-danger")
-icon.classList.add("bi-heart")
-}
-
-})
-
-})
+  })
 
 })
-
 </script>
 
 {% endblock %}

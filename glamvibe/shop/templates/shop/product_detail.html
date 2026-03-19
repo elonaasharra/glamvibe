@@ -4,98 +4,95 @@
 
 {% block content %}
 
-<div class="container my-5">
-
-<div class="card border-0 shadow-sm p-4">
-
-<div class="row align-items-center">
-
-<!-- FOTO MAJTAS -->
-<div class="col-md-6 text-center">
-
-{% if product.main_image %}
-<img src="{{ product.main_image.url }}" class="img-fluid" style="max-width:350px;">
-{% endif %}
-
+<div id="cart-message"
+class="alert alert-success text-center position-fixed top-0 start-50 translate-middle-x mt-5 shadow"
+style="display:none; z-index:1050; width:300px;">
+Product added to cart
 </div>
 
-<!-- DETAJET DJATHTAS -->
-<div class="col-md-6">
+<section class="container py-5">
 
-<h2 class="mb-3">{{ product.name }}</h2>
+  <!-- HERO -->
+  <header class="page-hero">
+    <h1 class="page-title">{{ product.name }}</h1>
+    <div class="page-divider"></div>
+  </header>
 
-<p class="text-muted small">
-Category:
-{% for category in product.categories.all %}
-<strong>{{ category.name }}</strong>{% if not forloop.last %}, {% endif %}
-{% endfor %}
-</p>
+  <div class="row align-items-center g-5">
 
-<hr>
+    <!-- IMAGE -->
+    <div class="col-md-6 text-center">
+      {% if product.main_image %}
+        <div class="product-detail-img">
+          <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+        </div>
+      {% endif %}
+    </div>
 
-<p style="line-height:1.8;">
-{{ product.description|linebreaksbr }}
-</p>
+    <!-- INFO -->
+    <div class="col-md-6">
 
-<h4 class="mt-4">${{ product.price }}</h4>
+      <p class="product-category">
+        {% for category in product.categories.all %}
+          {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
 
-<div class="d-flex gap-2 mt-4">
+      <p class="product-description">
+        {{ product.description|linebreaksbr }}
+      </p>
 
-<a href="{% url 'shop:shop_home' %}" class="btn btn-outline-dark btn-sm">
-← Back to Shop
-</a>
+      <div class="product-price-detail">
+        {{ product.price }}€
+      </div>
 
-<button class="btn btn-dark add-to-cart" data-id="{{ product.id }}">
-Add to Cart
-</button>
-</div>
+      <div class="product-actions mt-4">
 
-</div>
+        <a href="{% url 'shop:shop_home' %}" class="back-link">
+          ← Back
+        </a>
 
-</div>
+        <button class="add-to-cart" data-id="{{ product.id }}">
+          Add to Cart
+        </button>
 
-</div>
+      </div>
 
-</div>
+    </div>
+
+  </div>
+
+</section>
+
 <script>
-
 document.addEventListener("DOMContentLoaded", function(){
 
-const button = document.querySelector(".add-to-cart");
+  const button = document.querySelector(".add-to-cart");
 
-if(button){
+  if(button){
+    button.addEventListener("click", function(){
 
-button.addEventListener("click", function(){
+      const productId = this.dataset.id;
 
-const productId = this.dataset.id;
+      fetch(`/shop/add-to-cart/${productId}/`)
+      .then(response => response.json())
+      .then(data => {
 
-fetch(`/shop/add-to-cart/${productId}/`)
-.then(response => response.json())
-.then(data => {
+        const cart = document.getElementById("cart-count");
+        if(cart) cart.innerText = data.cart_count;
 
-const cart = document.getElementById("cart-count");
+        const msg = document.getElementById("cart-message");
+        if(msg){
+          msg.style.display = "block";
+          setTimeout(() => msg.style.display = "none", 2000);
+        }
 
-if(cart){
-cart.innerText = data.cart_count;
-}
+      });
 
-const msg = document.getElementById("cart-message");
-
-if(msg){
-msg.style.display = "block";
-
-setTimeout(function(){
-msg.style.display = "none";
-},2000);
-}
+    });
+  }
 
 });
-
-});
-
-}
-
-});
-
 </script>
+
 {% endblock %}

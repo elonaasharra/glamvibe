@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Order, OrderItem, Category
 from django.http import JsonResponse
+from django.db.models import Sum, Q
+from django.db.models.functions import Coalesce
 
 def shop_home(request):
 
@@ -12,8 +14,16 @@ def shop_home(request):
     if category_slug:
         products = products.filter(categories__slug=category_slug)
 
-    cart_count = 0
+    #  BEST SELLERS LOGIC
+    best_sellers = Product.objects.annotate(
+        total_sold=Coalesce(
+            Sum('order_items__quantity', filter=Q(order_items__order__completed=True)),
+            0
+        )
+    ).order_by('-total_sold')[:10]
 
+    #  CART
+    cart_count = 0
     if request.user.is_authenticated:
         order = Order.objects.filter(user=request.user, completed=False).first()
         if order:
@@ -22,7 +32,8 @@ def shop_home(request):
     return render(request, 'shop/shop_home.html', {
         'products': products,
         'categories': categories,
-        'cart_count': cart_count
+        'cart_count': cart_count,
+        'best_sellers': best_sellers,  # 👈 kjo është e re
     })
 
 from django.http import JsonResponse

@@ -148,8 +148,7 @@
       <div class="product-card">
 
       <div class="product-img">
-        <a href="{% url 'shop:shop_home' %}">
-          <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+<a href="{% url 'shop:product_detail' product.slug %}">          <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
         </a>
       </div>
         <div class="product-info">

@@ -3,53 +3,43 @@
 
 {% block content %}
 
-<div class="container py-5">
+<section class="container py-5">
 
+  <!-- HERO -->
+  <header class="page-hero">
+    <h1 class="page-title">{{ post.title }}</h1>
+
+    <p class="page-subtitle">
+      Posted by <strong>{{ post.author.username }}</strong>
+      • {{ post.created_at|date:"F d, Y" }}
+    </p>
+
+    <div class="page-divider"></div>
+  </header>
+
+  <!-- IMAGE -->
+  <div class="article-detail-img text-center mb-5">
+    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+  </div>
+
+  <!-- CONTENT -->
   <div class="row justify-content-center">
-
     <div class="col-lg-8">
 
-      <div class="card border-0 rounded-3 overflow-hidden">
+      <div class="article-content">
+        {{ post.content }}
+      </div>
 
-        <!-- IMAGE -->
-        <img src="{{ post.image.url }}"
-             class="card-img-top"
-             style="max-height:420px; object-fit:cover;">
-
-        <div class="card-body px-0 pt-4">
-
-          <!-- TITLE -->
-          <h2 class="fw-bold mb-2">{{ post.title }}</h2>
-
-          <!-- AUTHOR + DATE -->
-          <p class="text-muted small mb-4">
-            Posted by <strong>{{ post.author.username }}</strong>
-            • {{ post.created_at|date:"F d, Y" }}
-          </p>
-
-          <hr>
-
-          <!-- CONTENT -->
-          <div class="mt-4" style="line-height:1.9; font-size:17px;">
-            {{ post.content }}
-          </div>
-
-          <!-- BACK BUTTON -->
-          <div class="mt-5">
-            <a href="{% url 'magazine:magazine_home' %}"
-               class="btn btn-outline-dark px-4">
-               ← Back to Magazine
-            </a>
-          </div>
-
-        </div>
-
+      <!-- BACK -->
+      <div class="mt-5 text-center">
+        <a href="{% url 'magazine:magazine_home' %}" class="back-link">
+          ← Back to Magazine
+        </a>
       </div>
 
     </div>
-
   </div>
 
-</div>
+</section>
 
 {% endblock %}

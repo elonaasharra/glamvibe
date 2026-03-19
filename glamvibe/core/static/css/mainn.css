@@ -1,0 +1,431 @@
+/* ========================
+   GLOBAL (REUSABLE)
+======================== */
+
+.page-hero {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.page-title {
+  font-family:'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: #5A4636;
+  letter-spacing: .3px;
+}
+
+.page-subtitle {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.page-divider {
+  width: 60px;
+  height: 2px;
+  background: #C9A227;
+  margin: 25px auto 0 auto;
+  opacity: .6;
+}
+
+/* ========================
+   FILTERS
+======================== */
+
+.filter-btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 6px 14px;
+  font-size: 16px;
+  color: #5A4636;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-bottom: 1px solid #C9A227;
+  color: #000;
+}
+
+.filter-btn.active {
+  border-bottom: 1px solid #C9A227;
+  color: #000;
+  font-weight: 500;
+}
+
+/* ========================
+   PRODUCT CARD
+======================== */
+
+.product-card {
+  background: #fff;
+  padding-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.product-img {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.product-img img {
+  width: 100%;
+  height: 400px;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-name {
+  font-size: 15px;
+  color: #5A4636;
+  margin-top: 12px;
+}
+
+.product-price {
+  font-size: 14px;
+  color: #C9A227;
+  margin-top: 5px;
+}
+
+/* ACTIONS */
+
+.product-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+
+.add-to-cart {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #000;
+  border-bottom: 1px solid #000;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  color: #C9A227;
+  border-color: #C9A227;
+}
+
+.view-details {
+  font-size: 13px;
+  color: #5A4636;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.view-details:hover {
+  border-bottom: 1px solid #C9A227;
+  color: #000;
+}
+
+/* ========================
+   PRODUCT DETAIL
+======================== */
+
+.product-detail-img {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.product-detail-img img {
+  width: 100%;
+}
+
+.product-category {
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.product-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+.product-price-detail {
+  font-size: 20px;
+  color: #C9A227;
+  margin-top: 20px;
+}
+
+.back-link {
+  font-size: 13px;
+  color: #5A4636;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  border-bottom: 1px solid #C9A227;
+  color: #000;
+}
+/* ========================
+   MAGAZINE / ARTICLES
+======================== */
+
+.article-card {
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.article-img {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+.article-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.article-card:hover img {
+  transform: scale(1.05);
+}
+
+/* TEXT */
+
+.article-title {
+  font-size: 16px;
+  color: #5A4636;
+  margin-top: 12px;
+}
+
+.article-date {
+  font-size: 13px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.article-link {
+  font-size: 13px;
+  color: #000;
+  margin-top: 8px;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.article-link:hover {
+  color: #C9A227;
+  border-color: #C9A227;
+}
+
+/* ========================
+   PAGINATION
+======================== */
+
+.pagination-custom {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.page-btn {
+  font-size: 13px;
+  color: #5A4636;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.page-btn:hover {
+  border-bottom: 1px solid #C9A227;
+  color: #000;
+}
+
+.page-number {
+  font-size: 13px;
+  color: #000;
+}
+/* ========================
+   ARTICLE DETAIL
+======================== */
+
+.article-detail-img {
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.article-detail-img img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+
+.article-content {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #333;
+}
+
+.article-content p {
+  margin-bottom: 18px;
+}
+
+/* TYPOGRAPHY INSIDE CONTENT */
+
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  font-family:'Playfair Display', serif;
+  color: #5A4636;
+  margin-top: 25px;
+}
+
+/* LINKS INSIDE ARTICLE */
+
+.article-content a {
+  color: #000;
+  border-bottom: 1px solid #000;
+  text-decoration: none;
+}
+
+.article-content a:hover {
+  color: #C9A227;
+  border-color: #C9A227;
+}
+/* ========================
+   BLOG
+======================== */
+
+.article-excerpt {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* ACTIONS (READ + LIKE) */
+
+.article-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+/* LIKE BUTTON */
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #000;
+}
+
+.like-btn:hover {
+  color: #C9A227;
+}
+/* ========================
+   BLOG DETAIL EXTRA
+======================== */
+
+.article-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LIKE BUTTON (already exists but sigurim) */
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #000;
+}
+
+.like-btn:hover {
+  color: #C9A227;
+}
+.article-title {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #5A4636;
+  margin-top: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.article-title:hover {
+  color: #000;
+}
+
+
+
+
+.link-btn {
+  position: relative;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: #000;
+  text-decoration: none;
+
+  padding: 8px 16px;
+  border: 1px solid #000;
+  border-radius: 4px;
+
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.link-btn::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 6px;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.25s ease;
+}
+
+.link-btn:hover {
+  color: #C9A227;
+  border-color: #C9A227;
+}
+
+.link-btn:hover::after {
+  width: calc(100% - 32px);
+}

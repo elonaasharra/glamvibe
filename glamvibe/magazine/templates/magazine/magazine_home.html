@@ -3,92 +3,88 @@
 
 {% block content %}
 
-<div class="container my-5">
+<section class="container py-5">
 
-  <h1 class="text-center mb-5">MAGAZINE</h1>
-<div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
+  <!-- HERO -->
+  <header class="page-hero">
+    <h1 class="page-title">Magazine</h1>
 
-<a href="/magazine/"
-class="btn {% if not request.GET.category %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
-All
-</a>
+    <p class="page-subtitle">
+      Explore curated stories, trends and inspirations from the world of fashion.
+    </p>
 
-{% for category in categories %}
+    <div class="page-divider"></div>
+  </header>
 
-<a href="?category={{ category.slug }}"
-class="btn {% if request.GET.category == category.slug %}btn-dark{% else %}btn-outline-dark{% endif %} btn-sm">
+  <!-- FILTERS -->
+  <div class="text-center mb-5">
 
-{{ category.name }}
+    <a href="/magazine/"
+       class="filter-btn {% if not request.GET.category %}active{% endif %}">
+       All
+    </a>
 
-</a>
-
-{% endfor %}
-
-</div>
-  <div class="row g-4">
-
-    {% for post in posts %}
-
-    <div class="col-md-4">
-
-      <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">
-
-        <div class="card border-0 shadow-sm h-100">
-
-          <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
-
-          <div class="card-body">
-
-            <h5 class="card-title">{{ post.title }}</h5>
-
-            <p class="text-muted small">
-              {{ post.created_at|date:"F d, Y" }}
-            </p>
-
-            <span class="btn btn-outline-dark btn-sm">
-              Read Article
-            </span>
-
-          </div>
-
-        </div>
-
+    {% for category in categories %}
+      <a href="?category={{ category.slug }}"
+         class="filter-btn {% if request.GET.category == category.slug %}active{% endif %}">
+        {{ category.name }}
       </a>
-
-    </div>
-
     {% endfor %}
 
   </div>
 
-</div>
-<div class="d-flex justify-content-center mt-5">
+  <!-- POSTS -->
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-md-4 mb-5">
 
-  <nav>
+        <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
 
-    <ul class="pagination">
+          <div class="article-card">
+
+            <div class="article-img">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+
+            <div class="article-info text-center">
+              <div class="article-title">{{ post.title }}</div>
+
+              <div class="article-date">
+                {{ post.created_at|date:"F d, Y" }}
+              </div>
+
+              <div class="article-link">
+                Read Article
+              </div>
+            </div>
+
+          </div>
+
+        </a>
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="d-flex justify-content-center mt-5">
+
+    <div class="pagination-custom">
 
       {% if posts.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
-        </li>
+        <a href="?page={{ posts.previous_page_number }}" class="page-btn">Previous</a>
       {% endif %}
 
-      <li class="page-item active">
-        <span class="page-link">
-          {{ posts.number }}
-        </span>
-      </li>
+      <span class="page-number">{{ posts.number }}</span>
 
       {% if posts.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
-        </li>
+        <a href="?page={{ posts.next_page_number }}" class="page-btn">Next</a>
       {% endif %}
 
-    </ul>
+    </div>
 
-  </nav>
+  </div>
 
-</div>
+</section>
+
 {% endblock %}

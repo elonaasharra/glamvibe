@@ -3,89 +3,87 @@
 
 {% block content %}
 
-<div class="container my-5">
+<section class="container py-5">
 
-<div class="row justify-content-center">
+  <!-- HERO -->
+  <header class="page-hero">
+    <h1 class="page-title">{{ post.title }}</h1>
 
-<div class="col-lg-8">
+    <p class="page-subtitle">
+      Posted by <strong>{{ post.author.username }}</strong>
+      • {{ post.created_at|date:"F d, Y" }}
+    </p>
 
-<div class="card border-0 shadow-sm">
+    <div class="page-divider"></div>
+  </header>
 
-<img src="{{ post.image.url }}" class="card-img-top" style="max-height:400px; object-fit:cover;">
+  <!-- IMAGE -->
+  <div class="article-detail-img text-center mb-5">
+    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+  </div>
 
-<div class="card-body">
+  <!-- CONTENT -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 
-<h2 class="card-title mb-3">{{ post.title }}</h2>
+      <div class="article-content">
+        {{ post.content }}
+      </div>
 
-<p class="text-muted small">
-Posted by <strong>{{ post.author.username }}</strong> • {{ post.created_at|date:"F d, Y" }}
-</p>
+      <!-- ACTIONS -->
+      <div class="article-actions mt-5">
 
-<hr>
+        <a href="{% url 'blog:blog_home' %}" class="back-link">
+          ← Back to Blog
+        </a>
 
-<p class="card-text" style="line-height:1.8;">
-{{ post.content }}
-</p>
+        <button id="like-btn" data-slug="{{ post.slug }}" class="like-btn">
 
-<div class="d-flex justify-content-between align-items-center mt-4">
+          {% if user in post.liked_by.all %}
+            <i class="bi bi-heart-fill text-danger"></i>
+          {% else %}
+            <i class="bi bi-heart"></i>
+          {% endif %}
 
-<a href="{% url 'blog:blog_home' %}" class="btn btn-outline-dark btn-sm">
-← Back to Blog
-</a>
+          <span id="like-count">{{ post.likes }}</span>
 
-<button id="like-btn" data-slug="{{ post.slug }}" class="btn btn-light">
+        </button>
 
-{% if user in post.liked_by.all %}
-<i class="bi bi-heart-fill text-danger"></i>
-{% else %}
-<i class="bi bi-heart"></i>
-{% endif %}
+      </div>
 
-<span id="like-count">{{ post.likes }}</span>
+    </div>
+  </div>
 
-</button>
+</section>
 
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+<!-- JS -->
 <script>
-
 document.getElementById("like-btn").addEventListener("click", function(){
 
-const slug = this.dataset.slug;
+  const slug = this.dataset.slug;
 
-fetch(`/blog/like/${slug}/`, {
-method: "POST",
-headers: {
-"X-CSRFToken": "{{ csrf_token }}"
-}
-})
+  fetch(`/blog/like/${slug}/`, {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": "{{ csrf_token }}"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
 
-.then(response => response.json())
+    document.getElementById("like-count").innerText = data.likes;
 
-.then(data => {
+    const icon = document.querySelector("#like-btn i");
 
-document.getElementById("like-count").innerText = data.likes;
+    if(data.liked){
+      icon.className = "bi bi-heart-fill text-danger";
+    } else {
+      icon.className = "bi bi-heart";
+    }
 
-if(data.liked){
-document.querySelector("#like-btn i").className = "bi bi-heart-fill text-danger";
-}else{
-document.querySelector("#like-btn i").className = "bi bi-heart";
-}
+  });
 
 });
-
-});
-
 </script>
 
 {% endblock %}
