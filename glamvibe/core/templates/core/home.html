@@ -24,8 +24,9 @@
         <div class="carousel-caption hero-caption">
           <h5>New Season, New Energy</h5>
           <p>Discover the latest trends & editorials.</p>
-          <a href="#" class="btn btn-light btn-sm">Explore</a>
-        </div>
+<a href="{% url 'magazine:magazine_home' %}" class="btn btn-light btn-sm">
+  Explore
+</a>        </div>
       </div>
 
       <div class="carousel-item">
@@ -33,7 +34,7 @@
         <div class="carousel-caption hero-caption">
           <h5>Street Style Picks        </h5>
           <p>Inspiration you can wear every day.</p>
-          <a href="#" class="btn btn-light btn-sm">Read More</a>
+          <a href="{% url 'blog:blog_home' %}" class="btn btn-light btn-sm">Read More</a>
         </div>
       </div>
 
@@ -41,7 +42,7 @@
         <img src="{% static 'images/shop_slide3.png' %}" class="d-block w-100 hero-img" alt="GlamVibe Slide 3">
         <div class="carousel-caption hero-caption caption-left">          <h5>Shop the Look</h5>
           <p>Your glam starts here.</p>
-          <a href="#" class="btn btn-light btn-sm">Shop Now</a>
+          <a href="{% url 'shop:shop_home' %}" class="btn btn-light btn-sm">Shop Now</a>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 
 # Create your views here.
 import re
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib import messages
 from shop.models import Product
@@ -8,6 +9,7 @@ from django.db.models import Sum
 from magazine.models import Post
 from blog.models import BlogPost
 from .models import ContactMessage
+from .models import Subscriber
 
 def about(request):
     return render(request, 'core/about.html')
@@ -73,3 +75,22 @@ def contact_view(request):
 
     return render(request, "core/contact.html")
 
+
+
+def subscribe(request):
+    if request.method == "POST":
+
+        if request.user.is_authenticated:
+            email = request.user.email
+        else:
+            email = request.POST.get("email")
+
+        if email:
+            obj, created = Subscriber.objects.get_or_create(email=email)
+
+            if created:
+                messages.success(request, "Subscribed successfully!")
+            else:
+                messages.warning(request, "You are already subscribed!")
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))

@@ -3,6 +3,7 @@ from .models import BlogPost
 from .forms import BlogPostForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 def blog_home(request):
     posts = BlogPost.objects.all().order_by('-created_at')
@@ -14,7 +15,6 @@ def blog_home(request):
 def blog_post_detail(request, slug):
     post = get_object_or_404(BlogPost, slug=slug)
     return render(request, 'blog/post_detail.html', {'post': post})
-
 @login_required
 def create_post(request):
 
@@ -28,15 +28,13 @@ def create_post(request):
             post.save()
 
             return redirect("blog:blog_home")
+        else:
+            print(form.errors)
 
     else:
         form = BlogPostForm()
 
     return render(request, "blog/create_post.html", {"form": form})
-
-
-from django.http import JsonResponse
-
 @login_required
 def like_post(request, slug):
 

@@ -28,7 +28,15 @@
 <body class="d-flex flex-column min-vh-100">
 
     {% include 'core/partials/header.html' %}
-
+{% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
     <main class="flex-fill ">
         {% block content %}{% endblock %}
     </main>
@@ -51,6 +59,15 @@
     }
   });
 </script>
-
+<script>
+  setTimeout(() => {
+    const alerts = document.querySelectorAll(".alert");
+    alerts.forEach(alert => {
+      alert.style.transition = "opacity 0.5s";
+      alert.style.opacity = "0";
+      setTimeout(() => alert.remove(), 500);
+    });
+  }, 3000);
+</script>
 </body>
 </html>
