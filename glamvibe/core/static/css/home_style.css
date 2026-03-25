@@ -1,99 +1,91 @@
-/* Navbar normal */
-.main-navbar{
-  transition: padding .25s ease, box-shadow .25s ease, background-color .25s ease;
-  padding: 18px 0;                 /* override bootstrap py-0 */
-}
-
-/* Logo normal */
-.main-navbar .nav-logo{
-  height: 90px;
-  width: auto;
-  object-fit: contain;
-  transition: height .25s ease;
-}
-
-/* Shrink on scroll */
-.main-navbar.nav-shrink{
-  padding: 6px 0;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.main-navbar.nav-shrink .nav-logo{
-  height: 55px;
-}
 /* HERO Carousel */
+.home-hero {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 10px;
+}
+
 .home-hero .carousel {
   width: 100%;
 }
-.home-hero .carousel-caption {
-  left: auto;        /* heq positioning nga e majta */
-  right: 2%;         /* sa larg nga e djathta */
-  text-align: right; /* rreshtim tekst djathtas */
+/* FIX TOTAL PER IMAGES */
+.home-hero .carousel-item {
+  height: 500px;
+  border-radius: 16px;
 }
-/* Slide 3 - tekst majtas */
-.caption-left {
-  left: 8% !important;
-  right: auto !important;
-  text-align: left !important;
+.home-hero .carousel-caption {
+  width: auto;
+  padding: 0;
+}
+.home-hero .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* uniform për të gjitha fotot */
+  object-position: center; /* fokus në mes */
+  display: block;
 }
 
-/* Butoni ne mes te bllokut */
-.caption-left .btn {
-  display: block;
-  margin: 20px auto 0 auto;
-  width: fit-content;
+/* Caption positioning */
+.home-hero .carousel-caption {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
 }
-.home-hero .carousel-caption .btn {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-}
-/* Desktop large screens */
-@media (min-width: 1200px) {
-  .home-hero .hero-img {
-    height: 85vh;   /* më i gjatë në desktop */
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .home-hero .carousel-item {
+    height: 400px;
   }
 }
 
-
-/* Responsive heights */
-@media (max-width: 992px) {
-  .home-hero .hero-img { height: 55vh; }
-}
-
 @media (max-width: 576px) {
-  .home-hero .hero-img { height: 40vh; }
+  .home-hero .carousel-item {
+    height: 300px;
+  }
+
   .home-hero .hero-caption h5 { font-size: 18px; }
   .home-hero .hero-caption p { font-size: 14px; }
 }
-/* Default (mobile) */
+
+/* TEXT RESPONSIVE */
 .home-hero .hero-caption h5 {
   font-size: 20px;
 }
-.home-hero .hero-caption p  {
+
+.home-hero .hero-caption p {
   font-size: 14px;
 }
 
-/* Tablet */
 @media (min-width: 768px) {
   .home-hero .hero-caption h5 { font-size: 28px; }
   .home-hero .hero-caption p  { font-size: 16px; }
   .home-hero .hero-caption .btn { font-size: 14px; padding: 8px 14px; }
 }
 
-/* Laptop / PC */
 @media (min-width: 992px) {
   .home-hero .hero-caption h5 { font-size: 35px; }
   .home-hero .hero-caption p  { font-size: 18px; }
   .home-hero .hero-caption .btn { font-size: 15px; padding: 10px 18px; }
 }
 
-/* Large desktop */
 @media (min-width: 1200px) {
   .home-hero .hero-caption h5 { font-size: 52px; }
   .home-hero .hero-caption p  { font-size: 20px; }
 }
+
 
 /* MOST POPULAR========================================================================================================= */
 .most-popular-section{ padding: 60px 0; }
@@ -481,4 +473,16 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.home-hero .carousel-item {
+  position: relative;
+}
+
+.home-hero .carousel-caption .btn {
+  display: inline-block;
+  margin: 0 auto;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  width: 40px; /* më e ngushtë (default është ~15%) */
 }

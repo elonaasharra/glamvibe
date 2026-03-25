@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
 from .models import Product, Order, OrderItem, Category
 from django.http import JsonResponse
 from django.db.models import Sum, Q
 from django.db.models.functions import Coalesce
+from django.contrib import messages
 
 def shop_home(request):
 
@@ -39,7 +42,10 @@ def shop_home(request):
 from django.http import JsonResponse
 
 def add_to_cart(request, product_id):
-
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            "redirect": reverse("login")
+        })
     product = get_object_or_404(Product, id=product_id)
 
     order, created = Order.objects.get_or_create(
@@ -63,6 +69,8 @@ def add_to_cart(request, product_id):
     })
 def cart_view(request):
 
+    if not request.user.is_authenticated:
+        return redirect("login")
     order = Order.objects.filter(user=request.user, completed=False).first()
 
     items = []
@@ -73,9 +81,19 @@ def cart_view(request):
         "items": items
     })
 def checkout(request):
+
+    if not request.user.is_authenticated:
+        return redirect("login")
+
     order = Order.objects.filter(user=request.user, completed=False).first()
 
+    if order:
+        order.completed = True
+        order.save()
 
+        messages.success(request, "Order placed successfully 🎉")
+
+    return redirect("shop:cart")
 
 def remove_from_cart(request, item_id):
 

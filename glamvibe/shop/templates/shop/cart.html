@@ -33,8 +33,15 @@ Remove
 {% endfor %}
 </tbody>
 </table>
+    <form method="post" action="{% url 'shop:checkout' %}">
+  {% csrf_token %}
+  <button class="btn btn-dark w-100 mt-3">
+    Place Order
+  </button>
+</form>
 {% else %}
 <p>Your cart is empty.</p>
 {% endif %}
+
 </div>
 {% endblock %}

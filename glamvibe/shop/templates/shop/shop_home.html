@@ -91,19 +91,24 @@ document.addEventListener("DOMContentLoaded", function(){
 
       fetch(`/shop/add-to-cart/${productId}/`)
       .then(response => response.json())
-      .then(data => {
+     .then(data => {
 
-        document.getElementById("cart-count").innerText = data.cart_count;
+  if (data.redirect) {
+    window.location.href = data.redirect;
+    return;
+  }
 
-        const msg = document.getElementById("cart-message");
+  // normal behavior
+  document.getElementById("cart-count").innerText = data.cart_count;
 
-        if(msg){
-          msg.style.display = "block";
-          setTimeout(() => msg.style.display = "none", 2000);
-        }
+  const msg = document.getElementById("cart-message");
 
-      });
+  if(msg){
+    msg.style.display = "block";
+    setTimeout(() => msg.style.display = "none", 2000);
+  }
 
+});
     });
   });
 
