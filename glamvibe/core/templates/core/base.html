@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body>
 
     {% include 'core/partials/header.html' %}
 {% if messages %}
@@ -47,15 +47,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!--kontrollon scroll-in e faqes dhe ndryshon pamjen e navbar-it kur zbret poshte-->
-    <script>
-  window.addEventListener("scroll", function(){
-    const navbar = document.querySelector(".main-navbar");
-    if (!navbar) return;
+<script>
+  const navbar = document.getElementById("mainNavbar");
+  const logo = document.getElementById("logo");
 
-    if (window.scrollY > 50){
-      navbar.classList.add("nav-shrink");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 50) {
+      // kur ben scroll down
+      navbar.style.paddingTop = "8px";
+      navbar.style.paddingBottom = "8px";
+      logo.style.height = "40px";
     } else {
-      navbar.classList.remove("nav-shrink");
+      // kur eshte ne top
+      navbar.style.paddingTop = "18px";
+      navbar.style.paddingBottom = "18px";
+      logo.style.height = "55px";
     }
   });
 </script>

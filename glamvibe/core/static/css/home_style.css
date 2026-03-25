@@ -14,8 +14,9 @@
   border-radius: 16px;
 }
 .home-hero .carousel-caption {
-  width: auto;
-  padding: 0;
+  top: 65% !important;
+  bottom: 10% !important;
+  transform: translateY(-50%);
 }
 .home-hero .carousel-item img {
   width: 100%;
