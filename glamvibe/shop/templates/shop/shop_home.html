@@ -5,11 +5,19 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <div id="cart-message"
-class="alert alert-success text-center position-fixed top-0 start-50 translate-middle-x mt-5 shadow"
-style="display:none; z-index:1050; width:300px;">
-Product added to cart
+     class="alert alert-success text-center position-fixed top-0 start-50 translate-middle-x mt-5 shadow"
+     style="display:none; z-index:1050; width:300px;">
+    Product added to cart
 </div>
+{% else %}
+<div id="login-message"
+     class="alert alert-warning text-center position-fixed top-0 start-50 translate-middle-x mt-5 shadow"
+     style="display:none; z-index:1050; width:300px;">
+    Logohu fillimisht
+</div>
+{% endif %}
 
 <section class="container py-5">
 
@@ -62,7 +70,7 @@ Product added to cart
                 View Details
               </a>
 
-              <button class="add-to-cart" data-id="{{ product.id }}">
+              <button class="add-to-cart" onclick="handleAddToCart()" data-id="{{ product.id }}">
                 Add to Cart
               </button>
             </div>
@@ -114,5 +122,26 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
+<script>
+function handleAddToCart() {
+    const isAuthenticated = "{{ user.is_authenticated|yesno:'true,false' }}" === "true";
 
+    if (isAuthenticated) {
+        const msg = document.getElementById("cart-message");
+        msg.style.display = "block";
+
+        setTimeout(() => {
+            msg.style.display = "none";
+        }, 2000);
+
+    } else {
+        const msg = document.getElementById("login-message");
+        msg.style.display = "block";
+
+        setTimeout(() => {
+            msg.style.display = "none";
+        }, 2000);
+    }
+}
+</script>
 {% endblock %}
